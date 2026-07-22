@@ -383,7 +383,7 @@
             </div>
         </div>
 
-        <!-- ================= BAGIAN LEADERBOARD DINAMIS ================= -->
+        <!-- ================= BAGIAN LEADERBOARD STATIS (GITHUB PAGES) ================= -->
         <div id="leaderboard-view" style="display: none;">
             <main class="max-w-5xl mx-auto mt-6 bg-white/90 backdrop-blur-sm rounded-[2rem] shadow-lg p-10 relative overflow-hidden" style="border: 1px solid var(--border-color);">
                 
@@ -398,47 +398,44 @@
                         </p>
                     </div>
     
-                    <!-- PODIUM (RANK 1, 2, 3 DARI MYSQL) -->
-                    {% if leaderboard|length >= 3 %}
+                    <!-- PODIUM JUARA 1, 2, 3 STATIS -->
                     <div class="flex justify-center items-end mt-20 mb-12 relative w-fit mx-auto">
                         
                         <!-- Juara 2 -->
                         <div class="bg-[#e2e8f0]/90 w-44 rounded-t-xl p-4 flex flex-col items-center shadow-inner h-44 justify-end border-b-4 border-gray-300 relative">
                             <div class="absolute -top-8 flex flex-col items-center">
-                                <img src="{{ leaderboard[1].avatar }}" alt="Juara 2" class="w-12 h-12 rounded-full border-2 border-slate-300 shadow-md object-cover bg-white">
+                                <img src="https://ui-avatars.com/api/?name=Pro+User&background=random" alt="Juara 2" class="w-12 h-12 rounded-full border-2 border-slate-300 shadow-md object-cover bg-white">
                             </div>
                             <h3 class="font-bold text-gray-700">Juara 2</h3>
-                            <p class="font-bold text-[#5fcd88] text-sm mt-1 text-center truncate max-w-[130px]">{{ leaderboard[1].name }}</p>
-                            <p class="font-bold text-gray-800 text-sm">{{ leaderboard[1].total }}</p>
+                            <p class="font-bold text-[#5fcd88] text-sm mt-1 text-center truncate max-w-[130px]">ProTopUpUser</p>
+                            <p class="font-bold text-gray-800 text-sm">Rp 3.800.000</p>
                         </div>
 
                         <!-- Juara 1 (Dengan Mahkota Khusus) -->
                         <div class="bg-[#fceaa9]/90 w-48 rounded-t-xl p-4 flex flex-col items-center shadow-md h-56 justify-end relative z-10 border-b-4 border-yellow-400">
                             <div class="absolute -top-16 flex flex-col items-center">
-                                <!-- Mahkota Emas Animasi -->
                                 <i class="fa-solid fa-crown text-yellow-500 text-3xl drop-shadow-md mb-1 animate-bounce"></i>
-                                <img src="{{ leaderboard[0].avatar }}" alt="Juara 1" class="w-16 h-16 rounded-full border-4 border-yellow-400 shadow-lg object-cover bg-white">
+                                <img src="https://ui-avatars.com/api/?name=King+Robux&background=random" alt="Juara 1" class="w-16 h-16 rounded-full border-4 border-yellow-400 shadow-lg object-cover bg-white">
                             </div>
                             <h3 class="font-bold text-gray-800 text-lg">Juara 1</h3>
-                            <p class="font-bold text-[#5fcd88] mt-1 text-center truncate max-w-[140px]">{{ leaderboard[0].name }}</p>
-                            <p class="font-bold text-gray-800">{{ leaderboard[0].total }}</p>
+                            <p class="font-bold text-[#5fcd88] mt-1 text-center truncate max-w-[140px]">KingRobuxPro</p>
+                            <p class="font-bold text-gray-800">Rp 5.250.000</p>
                         </div>
 
                         <!-- Juara 3 -->
                         <div class="bg-[#f5d0b5]/90 w-44 rounded-t-xl p-4 flex flex-col items-center shadow-inner h-40 justify-end border-b-4 border-orange-300 relative">
                             <div class="absolute -top-8 flex flex-col items-center">
-                                <img src="{{ leaderboard[2].avatar }}" alt="Juara 3" class="w-12 h-12 rounded-full border-2 border-orange-300 shadow-md object-cover bg-white">
+                                <img src="https://ui-avatars.com/api/?name=Robux+Sultan&background=random" alt="Juara 3" class="w-12 h-12 rounded-full border-2 border-orange-300 shadow-md object-cover bg-white">
                             </div>
                             <h3 class="font-bold text-gray-700">Juara 3</h3>
-                            <p class="font-bold text-[#5fcd88] text-sm mt-1 text-center truncate max-w-[130px]">{{ leaderboard[2].name }}</p>
-                            <p class="font-bold text-gray-800 text-sm">{{ leaderboard[2].total }}</p>
+                            <p class="font-bold text-[#5fcd88] text-sm mt-1 text-center truncate max-w-[130px]">RobuxSultan12</p>
+                            <p class="font-bold text-gray-800 text-sm">Rp 2.900.000</p>
                         </div>
 
                         <img src="gambar 2.png" alt="Mascot" class="absolute -right-36 bottom-0 w-40 drop-shadow-md z-20">
                     </div>
-                    {% endif %}
     
-                    <!-- TABEL LEADERBOARD (RANK 4 KE ATAS DARI MYSQL) -->
+                    <!-- TABEL LEADERBOARD (JUARA 4 - 10 STATIS) -->
                     <table class="w-full text-center" style="border-collapse: separate; border-spacing: 0 10px;">
                         <thead>
                             <tr class="bg-[#5fcd88] text-white shadow-md">
@@ -450,19 +447,27 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm font-medium text-[#2c3e50]">
-                            {% for row in leaderboard %}
-                                {% if row.rank > 3 %}
-                                <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
-                                    <td class="py-3 px-4 rounded-l-full">
-                                        <div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">{{ row.rank }}</div>
-                                    </td>
-                                    <td class="py-3 px-4"><img src="{{ row.avatar }}" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
-                                    <td class="py-3 px-4 text-left text-[#5fcd88] font-bold">{{ row.name }}</td>
-                                    <td class="py-3 px-4 text-left text-gray-700">{{ row.total }}</td>
-                                    <td class="py-3 px-4 rounded-r-full text-gray-600">{{ row.status }}</td>
-                                </tr>
-                                {% endif %}
-                            {% endfor %}
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">4</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Game+Master" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#5fcd88] font-bold">GameMasterInd</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 1.500.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">5</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Robux+Hunter" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#5fcd88] font-bold">RobuxHunterX</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 1.250.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">6</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Super+Player" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#5fcd88] font-bold">SuperPlayer99</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 1.000.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
                         </tbody>
                     </table>
     
@@ -471,11 +476,9 @@
                             Lanjut Top Up
                         </a>
                     </div>
-                    
                 </div>
             </main>
         </div>
-
         <div id="detail-view">
             <div class="progress-container">
                 <div class="step"><div class="step-circle">1</div><div class="step-label">Order</div></div>
