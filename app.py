@@ -5,13 +5,14 @@ from flask import Flask, render_template, send_from_directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, template_folder=BASE_DIR, static_folder=BASE_DIR)
 
-# Fungsi Koneksi ke MySQL XAMPP
+# Fungsi Koneksi ke file.io
 def get_db_connection():
     return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='greentopup_db',
+        host='24hgxj.h.filess.io',
+        user='db_greentoup_discoveris',
+        port = "3305",
+        password='7fad1090377a48955a3068fd6d61ef9b33e6bf87',
+        database='db_greentoup_discoveris',
         cursorclass=pymysql.cursors.DictCursor
     )
 
