@@ -1,0 +1,21 @@
+<tbody class="table-group-divider">
+    {% if leaderboard %}
+        {% for player in leaderboard %}
+        <tr>
+            <td class="fw-bold text-center">#{{ loop.index }}</td>
+            <td>
+                <i class="fas fa-crown text-warning me-2"></i>
+                <strong>{{ player.roblox_username }}</strong>
+            </td>
+            <td class="text-success fw-bold">{{ player.total_robux }} R$</td>
+            <td>{{ player.total_transactions }}x Transaksi</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4" class="text-center text-muted py-4">
+                Belum ada transaksi. Jadilah pembeli pertama yang masuk leaderboard! 🚀
+            </td>
+        </tr>
+    {% endif %}
+</tbody>

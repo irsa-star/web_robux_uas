@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up - GreenTopUp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f4fbf7; font-family: 'Poppins', sans-serif; color: #3a414e; }
+        .card-product { border: none; border-radius: 20px; transition: 0.3s; background: #fff; }
+        .card-product:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,121,107,0.15); }
+        .btn-green { background-color: #00796b; color: #fff; font-weight: 600; border-radius: 50px; border: none; }
+        .btn-green:hover { background-color: #004d40; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm py-3">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-success" href="/"><img src="logo robux.png" height="30" class="me-2">GreenTopUp</a>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link active fw-bold text-success" href="/topup">Top Up</a>
+          <a class="nav-link" href="/leaderboard">Leaderboard</a>
+          <a class="nav-link ms-3 btn btn-outline-success rounded-pill px-4" href="/signin">Signin</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Pilih Paket Top Up Robux 🍀</h2>
+            <p class="text-muted">Masukkan Username Roblox kamu dan pilih paket yang diinginkan.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- FORM PEMBELIAN TOP UP -->
+                <form action="/checkout" method="POST" class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-5">
+                    
+                    <!-- 1. Input Username Roblox -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold"><i class="fas fa-user text-success me-2"></i>Username Roblox</label>
+                        <input type="text" name="roblox_username" class="form-control form-control-lg" placeholder="Contoh: RobloxGamer123" required>
+                    </div>
+
+                    <!-- 2. Pilih Paket Robux -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold"><i class="fas fa-gem text-success me-2"></i>Pilih Paket Robux</label>
+                        <div class="row g-3">
+                            {% if products %}
+                                {% for product in products %}
+                                <div class="col-md-6">
+                                    <div class="card card-product p-3 text-center border">
+                                        <input type="radio" name="product_id" value="{{ product.id }}" id="prod_{{ product.id }}" class="btn-check" required>
+                                        <label class="btn btn-outline-success border-0 w-100 text-start p-2" for="prod_{{ product.id }}">
+                                            <div class="fw-bold fs-5 text-dark">{{ product.name }}</div>
+                                            <div class="text-success fw-bold fs-4">Rp {{ "{:,.0f}".format(product.price) }}</div>
+                                            <small class="text-muted">{{ product.robux_amount }} Robux</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <!-- Opsi Default jika tabel products masih kosong -->
+                                <div class="col-md-6">
+                                    <div class="card card-product p-3 border">
+                                        <input type="radio" name="product_id" value="1" id="prod_1" class="btn-check" checked required>
+                                        <label class="btn btn-outline-success border-0 w-100 text-start p-2" for="prod_1">
+                                            <div class="fw-bold fs-5 text-dark">50 Robux PO</div>
+                                            <div class="text-success fw-bold fs-4">Rp 5.340</div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-product p-3 border">
+                                        <input type="radio" name="product_id" value="2" id="prod_2" class="btn-check" required>
+                                        <label class="btn btn-outline-success border-0 w-100 text-start p-2" for="prod_2">
+                                            <div class="fw-bold fs-5 text-dark">100 Robux PO</div>
+                                            <div class="text-success fw-bold fs-4">Rp 10.500</div>
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Tombol Beli -->
+                    <button type="submit" class="btn btn-green btn-lg w-100 mt-3 py-3">
+                        <i class="fas fa-shopping-cart me-2"></i>Beli Sekarang & Masuk Leaderboard
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

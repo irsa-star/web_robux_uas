@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenTopUp - Sistem Kassa Otomatis</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={corePlugins:{preflight:false}}</script>
+<style>
+html{scroll-behavior:smooth}:root{--bg-body:#f8fafc;--bg-nav-hero:#eaf7f0;--text-main:#334155;--text-muted:#64748b;--card-bg:#ffffff;--border-color:#e2e8f0;--card-top-bg:#f0fdf4;--input-bg:transparent;--btn-secondary-bg:#cbd5e1;--footer-bg:#eaf7f0}body.dark-mode{--bg-body:#0f172a;--bg-nav-hero:#1e293b;--text-main:#f8fafc;--text-muted:#94a3b8;--card-bg:#1e293b;--border-color:#334155;--card-top-bg:#0f172a;--input-bg:#334155;--btn-secondary-bg:#475569;--footer-bg:#1e293b}*{box-sizing:border-box;font-family:'Poppins',sans-serif;transition:all .3s ease}body{margin:0;background-color:var(--bg-body);color:var(--text-main);display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}.navbar{display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background-color:var(--bg-nav-hero);position:sticky;top:0;z-index:9999;box-shadow:0 4px 10px rgba(0,0,0,.05)}.nav-left,.nav-right{display:flex;align-items:center;gap:25px}.nav-left a,.nav-right a{text-decoration:none;color:var(--text-main);font-weight:600;font-size:15px;cursor:pointer}.nav-left a.active{color:#48bb78;border-bottom:2px solid #48bb78;padding-bottom:2px}.nav-left a:hover,.nav-right a:hover{color:#48bb78}.nav-center{position:absolute;left:50%;transform:translateX(-50%)}.nav-center .robux-logo{width:48px;cursor:pointer;filter:drop-shadow(0px 4px 6px rgba(0,0,0,.1))}.nav-center .robux-logo:hover{transform:scale(1.1) rotate(10deg)}.nav-right i{color:var(--text-main);font-size:18px;cursor:pointer}.nav-right i:hover{color:#48bb78}.main-content{flex:1}#home-view{display:block}.hero-section{background-color:var(--bg-nav-hero);text-align:center;padding:60px 20px 100px;border-bottom-left-radius:50px;border-bottom-right-radius:50px;margin-bottom:40px;position:relative;overflow:hidden;z-index:1}.hero-bg-leaf{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background-image:url('daun semanggi bg.png');background-size:contain;background-repeat:no-repeat;background-position:center;opacity:1;z-index:-1;pointer-events:none}body.dark-mode .hero-bg-leaf{opacity:.3}.hero-badge{background-color:var(--card-bg);color:#48bb78;font-size:11px;font-weight:700;padding:6px 16px;border-radius:20px;display:inline-block;margin-bottom:20px;letter-spacing:1px;box-shadow:0 2px 10px rgba(72,187,120,.1);border:1px solid var(--border-color)}.hero-section h1{color:var(--text-main);font-size:46px;font-weight:800;margin:0 0 15px;line-height:1.2}.hero-section p{color:var(--text-muted);font-size:16px;margin:0 auto 35px;max-width:600px;line-height:1.6}.hero-buttons{display:flex;justify-content:center;gap:15px}.btn-primary-custom{background-color:#6FCF97;color:#fff;border:none;padding:14px 30px;border-radius:30px;font-size:16px;font-weight:600;cursor:pointer;box-shadow:0 6px 20px rgba(111,207,151,.3)}.btn-primary-custom:hover{background-color:#48bb78;transform:translateY(-2px)}.btn-secondary-custom{background-color:transparent;color:var(--text-main);border:1px solid var(--text-main);padding:14px 30px;border-radius:30px;font-size:16px;font-weight:600;cursor:pointer}.btn-secondary-custom:hover{background-color:var(--text-main);color:var(--bg-body)}.section-title{text-align:center;margin:30px 0;color:var(--text-main);font-size:28px;font-weight:800}.cards-container{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;max-width:1200px;margin:0 auto 50px;padding:0 20px}.product-card{background-color:var(--card-bg);border-radius:24px;width:100%;max-width:340px;box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;display:flex;flex-direction:column;position:relative;border:1px solid var(--border-color)}.badge-rek{position:absolute;top:15px;left:50%;transform:translateX(-50%);background:#fff;color:#6FCF97;border:2px solid #6FCF97;padding:4px 16px;border-radius:20px;font-size:11px;font-weight:700;z-index:3;white-space:nowrap}.card-top{background-color:var(--card-top-bg);padding:40px 20px 10px;text-align:center;display:flex;flex-direction:column;align-items:center}.card-top h3{background-color:var(--card-bg);color:#2f855a;font-size:18px;font-weight:800;margin:10px 0 15px;padding:8px 24px;border-radius:30px;box-shadow:0 4px 15px rgba(0,0,0,.06);border:1px solid var(--border-color);position:relative;z-index:2}.card-top img{height:115px;margin-bottom:-20px;position:relative;z-index:1;display:block;margin-left:auto;margin-right:auto}.card-bottom{padding:35px 25px 25px;flex-grow:1;display:flex;flex-direction:column;background:var(--card-bg)}.price{color:#6FCF97;font-size:28px;font-weight:800;margin-bottom:15px}.price span{color:var(--text-muted);font-size:16px;font-weight:600}.list-items{list-style:none;padding:0;margin:0 0 30px;flex-grow:1}.list-items li{display:flex;gap:12px;font-size:13.5px;margin-bottom:12px;color:var(--text-main)}.list-items li i{color:#6FCF97;font-size:15px;margin-top:3px}.btn-buy{background:linear-gradient(135deg,#6FCF97 0%,#48bb78 100%);color:#fff;border:none;padding:15px;border-radius:25px;font-size:16px;font-weight:700;cursor:pointer;width:100%;box-shadow:0 5px 15px rgba(72,187,120,.2)}.btn-buy:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(72,187,120,.3)}.progress-container{display:flex;align-items:center;justify-content:center;margin-bottom:50px;position:relative}.progress-container::before{content:"";position:absolute;top:15px;left:10%;right:10%;height:2px;background:var(--border-color);z-index:1}.step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;width:80px}.step-circle{width:32px;height:32px;border-radius:50%;background:#e2e8f0;color:#64748b;display:flex;justify-content:center;align-items:center;font-weight:700;font-size:14px}.step.active .step-circle{background:#6FCF97;color:#fff;box-shadow:0 4px 10px rgba(111,207,151,.4)}.step-label{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;text-align:center}.step.active .step-label{color:var(--text-main)}.btn-continue-checkout{background:#6FCF97;color:#fff;border:none;padding:18px;width:100%;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;margin-top:20px;box-shadow:0 8px 20px rgba(111,207,151,.3);transition:all .3s}.btn-continue-checkout:hover{background:#48bb78;transform:translateY(-3px)}#detail-view{display:none;padding:40px 20px;max-width:1100px;margin:0 auto}.detail-layout{display:flex;gap:30px;align-items:flex-start;flex-wrap:wrap}.form-section{flex:1;min-width:300px;width:100%}.note-section{width:350px;background:var(--card-bg);border:1px solid var(--border-color);border-radius:20px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,.03)}.detail-title{font-size:38px;font-weight:900;margin-bottom:30px;color:var(--text-main);text-align:center}.form-input-box{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;display:flex;align-items:center;padding:15px 20px;margin-bottom:20px;box-shadow:inset 0 2px 5px rgba(0,0,0,.02)}.form-input-box i{color:var(--text-muted);font-size:18px;margin-right:15px;width:20px;text-align:center}.form-input-box input{border:none;outline:none;background:transparent;width:100%;font-size:15px;font-weight:500;color:var(--text-main)}.form-input-box.phone-input{padding-left:0}.phone-prefix{background:var(--bg-body);padding:15px 20px;font-weight:800;border-right:1px solid var(--border-color);color:var(--text-main);border-radius:12px 0 0 12px;margin-right:15px}.price-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:20px;flex-wrap:wrap}.price-display{font-size:24px;font-weight:800;color:var(--text-main)}.slider-container{margin-bottom:40px}.slider-val{font-size:18px;font-weight:800;margin-bottom:10px;display:block}input[type=range]{-webkit-appearance:none;width:100%;background:transparent}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:20px;width:20px;border-radius:50%;background:#6FCF97;cursor:pointer;margin-top:-8px;box-shadow:0 0 10px rgba(111,207,151,.5)}input[type=range]::-webkit-slider-runnable-track{width:100%;height:6px;cursor:pointer;background:#e2e8f0;border-radius:5px}.note-icon{width:60px;height:60px;background:linear-gradient(135deg,#d4af37,#f3e5ab);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:4px solid #fff;box-shadow:0 4px 10px rgba(212,175,55,.2)}.note-icon i{font-size:30px;color:#fff}.note-section h3{font-size:20px;font-weight:800;margin-bottom:20px;color:var(--text-main)}.note-list{list-style:none;padding:0;margin:0}.note-list li{position:relative;padding-left:25px;margin-bottom:15px;font-size:14px;color:var(--text-main);line-height:1.6}.note-list li::before{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;left:0;top:2px;color:#6FCF97}#login-detail-view{display:none;padding:40px 20px;max-width:1000px;margin:0 auto;text-align:center}.login-subtitle{color:var(--text-muted);font-size:15px;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.6}.login-subtitle span{color:#ef4444;font-weight:700}.login-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-bottom:40px}.login-card{background:var(--card-bg);border:2px solid var(--border-color);border-radius:20px;padding:25px 20px;cursor:pointer;position:relative;transition:all .3s;box-shadow:0 4px 15px rgba(0,0,0,.02);text-align:left}.login-card:hover{border-color:#6FCF97;transform:translateY(-5px)}.login-card.active{border-color:#6FCF97;background:#f0fdf4;box-shadow:0 10px 25px rgba(111,207,151,.2)}.pkg-header{font-size:18px;font-weight:800;color:#2f855a;margin-bottom:5px;display:flex;align-items:center;gap:8px}.pkg-header i{color:#d4af37}.pkg-time{font-size:12px;color:var(--text-muted);margin-bottom:15px;font-weight:600}.pkg-price-old{font-size:13px;color:#94a3b8;text-decoration:line-through;margin-bottom:2px}.pkg-price-new{font-size:20px;font-weight:900;color:var(--text-main)}.pkg-disc{position:absolute;bottom:20px;right:20px;background:#fca5a5;color:#7f1d1d;font-size:11px;font-weight:800;padding:4px 10px;border-radius:12px}#giftcard-detail-view{display:none;padding:60px 20px;max-width:800px;margin:0 auto}.giftcard-bubble{background:linear-gradient(145deg,var(--card-bg),#f0fdf4);border:3px dashed #6FCF97;border-radius:40px;padding:50px 40px;box-shadow:0 20px 40px rgba(111,207,151,.15);text-align:center;position:relative}.giftcard-icon{width:80px;height:80px;background:#6FCF97;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:35px;margin:-90px auto 20px;border:6px solid var(--bg-body);box-shadow:0 5px 15px rgba(111,207,151,.3)}.giftcard-bubble h2{font-size:32px;font-weight:900;color:var(--text-main);margin-bottom:10px}.giftcard-bubble p{color:var(--text-muted);font-size:15px;margin-bottom:30px;line-height:1.6}.giftcard-input{width:100%;max-width:450px;padding:18px 25px;border-radius:20px;border:2px solid var(--border-color);font-size:20px;font-weight:800;text-align:center;text-transform:uppercase;letter-spacing:3px;background:var(--bg-body);color:var(--text-main);margin-bottom:25px;outline:none;transition:border-color .3s}.giftcard-input:focus{border-color:#6FCF97;box-shadow:0 0 15px rgba(111,207,151,.2)}.giftcard-terms{font-size:12px;color:var(--text-muted);margin-bottom:30px}.giftcard-terms a{color:#6FCF97;text-decoration:none;font-weight:700}#about-view,#auth-view,#cart-view,#checkout-view{display:none;padding:60px 20px}.about-card{max-width:900px;margin:0 auto;display:flex;align-items:center;background-color:var(--card-bg);border:2px solid #6FCF97;border-radius:24px;padding:40px 50px;gap:40px;box-shadow:0 15px 40px rgba(0,0,0,.05)}.about-image img{max-width:200px;height:auto;filter:drop-shadow(0 10px 15px rgba(0,0,0,.1))}.about-content h2{font-size:34px;font-weight:800;color:var(--text-main);margin:0 0 15px 0}.about-content h2 span{color:#6FCF97}.about-content p{color:var(--text-muted);font-size:15px;line-height:1.7;margin-bottom:25px}.auth-box{max-width:450px;margin:0 auto;background:var(--card-bg);padding:40px;border-radius:24px;box-shadow:0 10px 40px rgba(0,0,0,.05);border:1px solid var(--border-color);text-align:center}.auth-title{font-size:28px;font-weight:800;color:#2f855a;margin-bottom:10px}.auth-desc{color:var(--text-muted);font-size:14px;margin-bottom:30px}.input-group{display:flex;align-items:center;border:2px solid var(--border-color);border-radius:14px;padding:4px 15px;margin-bottom:20px;background:var(--input-bg)}.input-group:focus-within{border-color:#6FCF97;box-shadow:0 0 10px rgba(111,207,151,.15)}.input-group i{color:var(--text-muted);font-size:18px;width:25px}.input-group input{border:none;outline:none;padding:12px 10px;font-size:15px;font-weight:500;width:100%;color:var(--text-main);background:transparent}.auth-switch{margin-top:25px;font-size:14px;color:var(--text-muted)}.auth-switch a{color:#48bb78;font-weight:700;cursor:pointer;text-decoration:none}#cart-view{max-width:800px;margin:0 auto}.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;border-bottom:2px solid var(--border-color);padding-bottom:15px}.cart-header h2{margin:0;color:var(--text-main);font-weight:800}.cart-empty{text-align:center;padding:60px 20px;background:var(--card-bg);border-radius:24px;border:1px dashed var(--border-color)}.checkout-box{background:var(--card-bg);max-width:680px;margin:0 auto;border-radius:24px;box-shadow:0 10px 40px rgba(0,0,0,.04);padding:40px;border:1px solid var(--border-color)}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:flex;justify-content:center;align-items:center;z-index:9999;opacity:0;visibility:hidden;transition:all .3s ease}.modal-overlay.show{opacity:1;visibility:visible}.modal-content{background:var(--card-bg);padding:40px 30px;border-radius:24px;text-align:center;max-width:380px;width:90%;box-shadow:0 20px 50px rgba(0,0,0,.2);transform:translateY(30px) scale(.95);transition:all .3s;border:2px solid #6FCF97;position:relative}.modal-overlay.show .modal-content{transform:translateY(0) scale(1)}.modal-icon-container{width:70px;height:70px;background:#eaf7f0;border-radius:50%;display:flex;justify-content:center;align-items:center;margin:0 auto 20px;color:#48bb78;font-size:35px}.phone-box{background:var(--card-top-bg);color:#2f855a;font-size:20px;font-weight:800;padding:15px;border-radius:16px;margin-bottom:25px;border:1px dashed #6FCF97;display:flex;align-items:center;justify-content:center;gap:10px}.btn-close-modal{background:#6FCF97;color:#fff;border:none;padding:12px 30px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;width:100%}.footer{background-color:var(--footer-bg);padding:60px 50px 20px;border-top:1px solid var(--border-color);margin-top:40px}.footer-content{display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;max-width:1200px;margin:0 auto;padding-bottom:40px;border-bottom:1px solid var(--border-color)}.footer-brand{flex:1;min-width:300px}.footer-logo-box{background:#fff;padding:15px;border-radius:20px;display:inline-block;margin-bottom:20px;box-shadow:0 4px 15px rgba(0,0,0,.05)}.footer-logo-box img{width:80px}.footer-brand p{color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:20px}.social-icons{display:flex;gap:15px}.social-icons div{width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-main);font-size:18px;cursor:pointer;border:1px solid var(--border-color)}.footer-links-container{display:flex;gap:60px;flex-wrap:wrap}.footer-column h4{color:var(--text-main);font-size:16px;font-weight:800;margin:0 0 20px 0}.footer-column ul{list-style:none;padding:0;margin:0}.footer-column ul li{margin-bottom:12px}.footer-column ul li a{color:var(--text-muted);text-decoration:none;font-size:14px;cursor:pointer}.footer-bottom{text-align:center;padding-top:25px}.footer-bottom p{margin:0;color:var(--text-main);font-weight:700;font-size:14px}.footer-bottom .disclaimer{color:var(--text-muted);font-size:12px;font-weight:400;margin-top:10px;max-width:800px;margin-left:auto;margin-right:auto;line-height:1.5}.status-badge-success{background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block}.status-badge-failed{background:#fee2e2;color:#b91c1c;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block}.status-badge-info{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block}@media (max-width:850px){.detail-layout{flex-direction:column}.note-section{width:100%}.about-card{flex-direction:column;text-align:center;padding:30px}}@media (max-width:768px){.navbar{padding:15px 20px;flex-direction:column;gap:15px}.nav-center{position:static;transform:none;order:-1;margin-bottom:5px}.nav-left,.nav-right{width:100%;justify-content:center;gap:15px;flex-wrap:wrap}.nav-left a,.nav-right a{font-size:13px}.hero-section{padding:40px 15px 70px;border-bottom-left-radius:30px;border-bottom-right-radius:30px}.hero-bg-leaf{width:350px;height:350px}.hero-section h1{font-size:32px}.hero-section p{font-size:14px;padding:0 10px}.hero-buttons{flex-direction:column;padding:0 20px}.hero-buttons button{width:100%}.cards-container{padding:0 15px;gap:20px}.product-card{width:100%;max-width:100%;margin-top:0!important}.progress-container::before{left:5%;right:5%}.step{width:60px}.step-circle{width:28px;height:28px;font-size:12px}.step-label{font-size:9px}.detail-title{font-size:28px}.form-input-box[style*="width: 50%"]{width:100%!important;margin-bottom:15px!important}.price-row{flex-direction:column;align-items:stretch;gap:5px}.price-display{text-align:center;margin-bottom:10px}.login-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}.pkg-header{font-size:15px}.pkg-price-new{font-size:18px}.giftcard-bubble{padding:40px 20px 30px}.giftcard-bubble h2{font-size:24px}.giftcard-input{font-size:16px;padding:15px;letter-spacing:2px}.footer{padding:40px 20px 20px}.footer-links-container{gap:30px;flex-direction:column}}@media (max-width:480px){.hero-section h1{font-size:28px}.login-grid{grid-template-columns:1fr}.cart-header h2{font-size:20px}.checkout-box{padding:25px 15px}}
+</style>
+</head>
+<body>
+    <nav class="navbar" id="top">
+        <div class="nav-left">
+            <a href="javascript:void(0)" onclick="navigatePage('home')" class="active" id="navHome">Home</a>
+            <a href="javascript:void(0)" onclick="navigatePage('about')" id="navAbout">About Us</a>
+            <a href="javascript:void(0)" onclick="navigatePage('home', 'product-section')" id="navTopup">Top Up</a>
+            <a href="javascript:void(0)" onclick="navigatePage('leaderboard')" id="navLeaderboard">Leaderboard</a>
+            <a onclick="showContactModal()">Contact</a>
+        </div>
+        
+       <div class="nav-center">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Roblox Logo" class="robux-logo" style="height: 55px; width: auto; cursor: pointer;" onclick="navigatePage('home')" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Roblox_player_icon_2022.svg/1200px-Roblox_player_icon_2022.svg.png'">
+</div>
+        
+        <div class="nav-right">
+            <a href="javascript:void(0)" onclick="navigatePage('auth', 'signin')" id="navSignin">Signin</a>
+            <a href="javascript:void(0)" onclick="navigatePage('auth', 'signup')" id="navSignup">Signup</a>
+            <a onclick="navigatePage('check-order')" id="navCheckOrder">Cek Pesanan</a>
+            <i class="fa-solid fa-moon" id="darkModeBtn" onclick="toggleDarkMode()"></i>
+            <i class="fa-solid fa-cart-shopping" onclick="navigatePage('cart')"></i>
+        </div>
+    </nav>
+    <div class="main-content">
+        <div id="home-view">
+            <div class="hero-section">
+                <div class="hero-bg-leaf"></div>
+                <div class="hero-badge">BELI ROBUX</div>
+                <h1>Pilih Tipe Robux yang<br>Ingin Kamu Beli</h1>
+                <p class="deskripsi-katalog">Sesuaikan dengan isi dompetmu, stok sabarmu, atau sekadar ikut hati.<br>Bebas, kamu pilih sendiri!</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary-custom" onclick="navigatePage('home', 'product-section')">Mulai Top Up</button>
+                    <button class="btn-secondary-custom" onclick="navigatePage('about')">Kenapa Green?</button>
+                </div>
+            </div>
+            <h2 class="section-title" id="product-section">Pilih Gamepass 🍀🦚</h2>
+            <div class="cards-container">
+                <div class="product-card" style="margin-top: -15px;">
+                    <div class="badge-rek">REKOMENDASI TERMURAH</div>
+                    <div class="card-top">
+                        <h3>Robux Gamepass PO</h3>
+                        <img src="gambar 2.png" alt="Mascot" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3254/3254924.png';">
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price">Rp 5.340 <span>/ 50R$</span></div>
+                        <ul class="list-items">
+                            <li><i class="fa-solid fa-check"></i> Harga super murah & ramah pelajar</li>
+                            <li><i class="fa-solid fa-check"></i> Proses PO aman sekitar 7-9 hari</li>
+                            <li><i class="fa-solid fa-check"></i> Stok selalu ada, bisa beli kapan aja!</li>
+                        </ul>
+                        <button class="btn-buy" onclick="goToDetail('Robux Gamepass PO', 5340, 50)">Beli Sekarang</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-top">
+                        <h3>Robux Via Login</h3>
+                        <img src="gambar 2.png" alt="Mascot" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3254/3254924.png';">
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price">Proses Instan <span>/ 24 Jam</span></div>
+                        <ul class="list-items">
+                            <li><i class="fa-solid fa-check"></i> Top-up Robux jadi super cepat & gampang!</li>
+                            <li><i class="fa-solid fa-check"></i> Cukup pakai username + password aja</li>
+                            <li><i class="fa-solid fa-check"></i> Nggak perlu ribet bikin Gamepass</li>
+                        </ul>
+                        <button class="btn-buy" onclick="goToDetail('Robux Via Login', 0, 0)">Beli Sekarang</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="card-top">
+                        <h3>Robux Gift Gamecard</h3>
+                        <img src="gambar 2.png" alt="Mascot" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3254/3254924.png';">
+                    </div>
+                    <div class="card-bottom">
+                        <div class="price">Gift Gamecard <span>/ 1 Jam</span></div>
+                        <ul class="list-items">
+                            <li><i class="fa-solid fa-check"></i> Kode Robux Gift Gamecard siap redeem</li>
+                            <li><i class="fa-solid fa-check"></i> Fleksibel digunakan kapan saja</li>
+                            <li><i class="fa-solid fa-check"></i> Sangat cocok untuk diberikan sebagai hadiah</li>
+                        </ul>
+                        <button class="btn-buy" onclick="goToDetail('Robux Gift Gamecard', 0, 0)">Beli Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CEK PESANAN VIEW 1: Form Pencarian -->
+        <div id="check-order-search-view" style="display: none; padding: 40px 20px; max-width: 800px; margin: 0 auto;">
+            <div class="text-center mb-6">
+                <span style="background: #6FCF97; color: #fff; padding: 6px 20px; border-radius: 20px; font-weight: 800; font-size: 13px; letter-spacing: 1px;">CEK PESANAN</span>
+                <h1 style="font-size: 36px; font-weight: 900; color: var(--text-main); margin: 15px 0 10px;">Cek Pesanan Kamu</h1>
+                <p style="color: var(--text-muted); font-size: 14px; max-width: 550px; margin: 0 auto;">Pembelian lewat Aplikasi Discord atau Telegram tidak dapat dicek disini yah SobatGreen!</p>
+            </div>
+            
+            <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                <div style="display: flex; gap: 10px; margin-bottom: 25px; background: var(--bg-body); padding: 6px; border-radius: 16px;">
+                    <button id="tabUserBtn" style="flex: 1; padding: 12px; border: none; border-radius: 12px; background: #6FCF97; color: #fff; font-weight: 700; cursor: pointer;" onclick="switchCheckTab('user')">Pakai Username / Email</button>
+                    <button id="tabInvoiceBtn" style="flex: 1; padding: 12px; border: none; border-radius: 12px; background: transparent; color: var(--text-muted); font-weight: 700; cursor: pointer;" onclick="switchCheckTab('invoice')">Pakai Invoice ID</button>
+                </div>
+
+                <div class="form-input-box" style="margin-bottom: 25px;">
+                    <i class="fa-solid fa-cube" style="color: #6FCF97;"></i>
+                    <input type="text" id="checkOrderInput" placeholder="Username Roblox atau Email kamu">
+                </div>
+
+                <button class="btn-buy" style="padding: 16px; border-radius: 16px; font-size: 16px; font-weight: 800;" onclick="handleSearchOrder()">Cek Pesananku</button>
+
+                <div style="margin-top: 25px; background: var(--card-top-bg); border: 1px dashed #6FCF97; border-radius: 16px; padding: 20px; display: flex; align-items: center; gap: 15px;">
+                    <img src="gambar 2.png" alt="Mascot" style="width: 50px; height: 50px; object-fit: contain;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3254/3254924.png';">
+                    <div style="font-size: 13px; color: var(--text-main); line-height: 1.5;">
+                        <strong>Catatan:</strong><br>
+                        Kalau kamu beli <strong>Robux Via Login</strong>, pesanan hanya bisa dicari melalui <strong>Invoice ID</strong> ya SobatGreen! 😊
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted);">
+                    Belum memesan? <a href="javascript:void(0)" onclick="navigatePage('home', 'product-section')" style="color: #6FCF97; font-weight: 700; text-decoration: none;">Belanja Disini</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CEK PESANAN VIEW 2: Daftar Pesanan (Tabel) -->
+        <div id="check-order-list-view" style="display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto;">
+            <p style="text-align: center; color: var(--text-muted); font-size: 15px; margin-bottom: 25px;">
+                Menampilkan pesanan untuk Username atau Email: <strong id="displaySearchQuery" style="color: #6FCF97;">-</strong>
+            </p>
+            <h2 style="font-size: 32px; font-weight: 900; color: var(--text-main); margin-bottom: 20px;">Daftar Pesanan</h2>
+
+            <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; min-width: 800px; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted); font-size: 13px; text-transform: uppercase;">
+                            <th style="padding: 12px 10px;">Invoice</th>
+                            <th style="padding: 12px 10px;">Tanggal</th>
+                            <th style="padding: 12px 10px;">Total Pembayaran</th>
+                            <th style="padding: 12px 10px;">Status Pesanan</th>
+                            <th style="padding: 12px 10px;">Status Pembayaran</th>
+                            <th style="padding: 12px 10px;">Status Pengiriman</th>
+                            <th style="padding: 12px 10px; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody" style="font-size: 14px; font-weight: 600;">
+                        <!-- Item pesanan diinjeksi via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="btn-secondary-custom" onclick="navigatePage('check-order')"><i class="fa-solid fa-arrow-left"></i> Cari Lainnya</button>
+            </div>
+        </div>
+
+        <!-- CEK PESANAN VIEW 3: Detail Invoice -->
+        <div id="check-order-detail-view" style="display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto;">
+            <div style="display: flex; gap: 25px; flex-wrap: wrap;">
+                <!-- Kiri: Rincian Produk -->
+                <div style="flex: 1; min-width: 320px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                    <h3 style="font-size: 22px; font-weight: 800; color: var(--text-main); margin-bottom: 25px;">Rincian Produk</h3>
+                    
+                    <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 25px;">
+                        <div style="width: 80px; height: 80px; background: var(--card-top-bg); border-radius: 20px; border: 2px solid #6FCF97; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-gem" style="font-size: 35px; color: #6FCF97;"></i>
+                        </div>
+                        <div>
+                            <h4 id="invProdTitle" style="font-size: 20px; font-weight: 800; color: var(--text-main); margin: 0 0 5px 0;">280 Robux</h4>
+                            <p id="invProdType" style="font-size: 13px; color: var(--text-muted); margin: 0;">Jenis Pengiriman - Robux-Gamepass</p>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px dashed var(--border-color); padding-top: 15px; font-size: 13.5px; color: var(--text-muted); line-height: 2;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Estimasi robux pending</span>
+                            <strong id="invProdPending" style="color: var(--text-main);">-</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Estimasi robux masuk</span>
+                            <strong id="invProdMasuk" style="color: var(--text-main);">-</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <span>Jumlah</span>
+                            <strong style="color: var(--text-main);">1x</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Harga Produk</span>
+                            <strong id="invProdPrice" style="color: #6FCF97; font-size: 16px;">-</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kanan: Rincian Pesanan -->
+                <div style="flex: 1.2; min-width: 320px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                    <h3 style="font-size: 22px; font-weight: 800; color: var(--text-main); margin-bottom: 20px;">Rincian Pesanan</h3>
+                    
+                    <div style="font-size: 14px; display: flex; flex-direction: column; gap: 12px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Invoice ID</span>
+                            <strong id="invIdText" style="color: var(--text-main);">GREEN20260412-92D7P2H</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Username Roblox</span>
+                            <strong id="invUsernameText" style="color: var(--text-main);">Irsa_Syantik2</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">List Item</span>
+                            <strong id="invListItems" style="color: var(--text-main);">280 Robux</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                            <span style="color: var(--text-muted);">Status Pesanan</span>
+                            <span id="invStatusPesanan" class="status-badge-success">Sukses</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--text-muted);">Status Pembayaran</span>
+                            <span id="invStatusPembayaran" class="status-badge-success">Sukses</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--text-muted);">Status Pengiriman</span>
+                            <span id="invStatusPengiriman" class="status-badge-info">Cek Pending Robux</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Jenis Pengiriman</span>
+                            <strong id="invJenisPengiriman" style="color: var(--text-main);">Robux-Gamepass</strong>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 10px 0;">
+
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Total Item</span>
+                            <strong style="color: var(--text-main);">1</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Total Harga</span>
+                            <strong id="invSubtotal" style="color: var(--text-main);">Rp 28.658</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Biaya Admin</span>
+                            <strong id="invAdminFee" style="color: var(--text-main);">Rp 225</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Total Diskon</span>
+                            <strong style="color: var(--text-main);">Rp 0</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: var(--text-muted);">Biaya Layanan (11%)</span>
+                            <strong id="invServiceFee" style="color: var(--text-main);">Rp 3.542</strong>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 10px 0;">
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 18px;">
+                            <span style="font-weight: 800; color: #6FCF97;">Total Akhir</span>
+                            <strong id="invGrandTotal" style="font-weight: 900; color: #6FCF97; font-size: 22px;">Rp 32.425</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <button class="btn-secondary-custom" onclick="navigatePage('check-order-list')"><i class="fa-solid fa-arrow-left"></i> Kembali ke Daftar Pesanan</button>
+            </div>
+        </div>
+
+        <div id="leaderboard-view" style="display: none;">
+            <main class="max-w-5xl mx-auto mt-6 bg-white/90 backdrop-blur-sm rounded-[2rem] shadow-lg p-10 relative overflow-hidden" style="border: 1px solid var(--border-color);">
+                <div class="absolute inset-0 pointer-events-none z-0" style="background-image: url('daun semanggi bg.png'); background-position: center 20%; background-repeat: no-repeat; background-size: 70%; opacity: 0.15;"></div>
+                <div class="relative z-10">
+                    <div class="text-center mb-12">
+                        <h1 class="text-4xl font-extrabold mb-3 text-[#2c3e50]" style="color: var(--text-main);">Leaderboard Top Spender GreenTopUp</h1>
+                        <p class="text-gray-500 font-medium max-w-2xl mx-auto" style="color: var(--text-muted);">
+                            Daftar para Sultan yang paling banyak melakukan Top Up bulan ini!<br>
+                            Ayoo Top Up terus untuk raih posisi teratas!
+                        </p>
+                    </div>
+                    <div class="flex justify-center items-end mt-20 mb-12 relative w-fit mx-auto">
+                        <div class="bg-[#e2e8f0]/90 w-44 rounded-t-xl p-4 flex flex-col items-center shadow-inner h-44 justify-end border-b-4 border-gray-300 relative">
+                            <div class="absolute -top-8 flex flex-col items-center">
+                                <img src="https://ui-avatars.com/api/?name=Pro+User&background=5fcd88&color=fff" alt="Juara 2" class="w-12 h-12 rounded-full border-2 border-slate-300 shadow-md object-cover bg-white">
+                            </div>
+                            <h3 class="font-bold text-gray-700">Juara 2</h3>
+                            <p class="font-extrabold text-[#2f855a] text-sm my-1 text-center">ProTopUpUser</p>
+                            <p class="font-bold text-gray-800 text-sm">Rp 3.800.000</p>
+                        </div>
+                        <div class="bg-[#fceaa9]/90 w-48 rounded-t-xl p-4 flex flex-col items-center shadow-md h-56 justify-end relative z-10 border-b-4 border-yellow-400">
+                            <div class="absolute -top-16 flex flex-col items-center">
+                                <i class="fa-solid fa-crown text-yellow-500 text-3xl drop-shadow-md mb-1 animate-bounce"></i>
+                                <img src="https://ui-avatars.com/api/?name=King+Robux&background=5fcd88&color=fff" alt="Juara 1" class="w-16 h-16 rounded-full border-4 border-yellow-400 shadow-lg object-cover bg-white">
+                            </div>
+                            <h3 class="font-bold text-gray-800 text-lg">Juara 1</h3>
+                            <p class="font-extrabold text-[#2f855a] text-base my-1 text-center">KingRobuxPro</p>
+                            <p class="font-bold text-gray-800">Rp 5.250.000</p>
+                        </div>
+                        <div class="bg-[#f5d0b5]/90 w-44 rounded-t-xl p-4 flex flex-col items-center shadow-inner h-40 justify-end border-b-4 border-orange-300 relative">
+                            <div class="absolute -top-8 flex flex-col items-center">
+                                <img src="https://ui-avatars.com/api/?name=Robux+Sultan&background=5fcd88&color=fff" alt="Juara 3" class="w-12 h-12 rounded-full border-2 border-orange-300 shadow-md object-cover bg-white">
+                            </div>
+                            <h3 class="font-bold text-gray-700">Juara 3</h3>
+                            <p class="font-extrabold text-[#2f855a] text-sm my-1 text-center">RobuxSultan12</p>
+                            <p class="font-bold text-gray-800 text-sm">Rp 2.900.000</p>
+                        </div>
+                        <img src="gambar 2.png" alt="Mascot" class="absolute -right-36 bottom-0 w-40 drop-shadow-md z-20">
+                    </div>
+                    <table class="w-full text-center" style="border-collapse: separate; border-spacing: 0 10px;">
+                        <thead>
+                            <tr class="bg-[#5fcd88] text-white shadow-md">
+                                <th class="py-3 px-4 rounded-l-full font-semibold w-20">No</th>
+                                <th class="py-3 px-4 font-semibold w-24">Avatar</th>
+                                <th class="py-3 px-4 font-semibold text-left">Nama Pengguna</th>
+                                <th class="py-3 px-4 font-semibold text-left">Total Top Up</th>
+                                <th class="py-3 px-4 rounded-r-full font-semibold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium text-[#2c3e50]">
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">4</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Game+Master&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">GameMasterInd</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 1.500.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">5</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Robux+Hunter&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">RobuxHunterX</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 1.250.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">6</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Super+Player&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">SuperPlayer99</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 1.000.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">7</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Gamer+Sejati&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">GamerSejati</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 850.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">8</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Bocil+Kematian&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">BocilKematian</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 700.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">9</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Noob+To+Pro&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">NoobToPro</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 550.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                            <tr class="bg-white/95 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] rounded-full hover:bg-gray-50 transition">
+                                <td class="py-3 px-4 rounded-l-full"><div class="bg-[#5fcd88] text-white w-8 h-8 flex items-center justify-center mx-auto font-bold" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">10</div></td>
+                                <td class="py-3 px-4"><img src="https://ui-avatars.com/api/?name=Top+Global1&background=random" class="w-10 h-10 rounded-full mx-auto" alt="Avatar"></td>
+                                <td class="py-3 px-4 text-left text-[#2f855a] font-bold">TopGlobal1</td>
+                                <td class="py-3 px-4 text-left text-gray-700">Rp 400.000</td>
+                                <td class="py-3 px-4 rounded-r-full text-gray-600">SultanAktif</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="flex justify-center mt-10 relative z-20">
+                        <a href="javascript:void(0)" onclick="navigatePage('home', 'product-section')" class="bg-[#5fcd88] hover:bg-green-500 text-white font-bold py-3 px-10 rounded-full shadow-lg transition duration-300 transform hover:scale-105 border-2 border-transparent" style="text-decoration: none;">Lanjut Top Up</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <div id="detail-view">
+            <div class="progress-container">
+                <div class="step"><div class="step-circle">1</div><div class="step-label">Order</div></div>
+                <div class="step active"><div class="step-circle">2</div><div class="step-label">Detail</div></div>
+                <div class="step"><div class="step-circle">3</div><div class="step-label">Buat</div></div>
+                <div class="step"><div class="step-circle">4</div><div class="step-label">Metode</div></div>
+                <div class="step"><div class="step-circle">5</div><div class="step-label">Selesai</div></div>
+            </div>
+            <h2 class="detail-title">Detail Informasi</h2>
+            <div class="detail-layout">
+                <div class="form-section">
+                    <div class="form-input-box">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Username Roblox" id="robloxUsername">
+                    </div>
+                    <div class="price-row">
+                        <div class="form-input-box" style="margin-bottom: 0; width: 50%;">
+                            <i class="fa-solid fa-coins" style="color: #d4af37;"></i>
+                            <input type="number" id="robuxInputNumber" oninput="syncSlider()">
+                        </div>
+                        <div class="price-display" id="totalPriceDisplay">Rp 5.340</div>
+                    </div>
+                    <div class="slider-container">
+                        <span class="slider-val" id="sliderValDisplay">50</span>
+                        <input type="range" id="robuxSlider" min="10" max="10000" step="10" value="50" oninput="syncInput()">
+                    </div>
+                    <div class="form-input-box phone-input">
+                        <div class="phone-prefix">+62</div>
+                        <input type="tel" placeholder="Nomor WhatsApp (misal: 0821...)" id="waNumber">
+                    </div>
+                    <div class="form-input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email Notifikasi (Opsional)" id="emailNotif">
+                    </div>
+                    <button class="btn-continue-checkout" onclick="addToCartFromDetail()">Lanjutkan Pembayaran</button>
+                    <button class="btn-secondary-custom" style="width: 100%; border: none; margin-top: 10px;" onclick="navigatePage('home')">Kembali</button>
+                </div>
+                <div class="note-section">
+                    <div class="note-icon"><i class="fa-brands fa-first-order-alt"></i></div>
+                    <h3>Catatan:</h3>
+                    <ul class="note-list">
+                        <li>Akan muncul <strong>pending</strong> di akunmu dalam <strong>2-3 hari</strong>.</li>
+                        <li>Setelah itu, Robux akan masuk sepenuhnya dalam ±5 hari berikutnya.</li>
+                        <li>Estimasi waktu keseluruhan sekitar 7-9 hari.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="login-detail-view">
+            <div class="progress-container">
+                <div class="step"><div class="step-circle">1</div><div class="step-label">Pilih</div></div>
+                <div class="step active"><div class="step-circle">2</div><div class="step-label">Nominal</div></div>
+                <div class="step"><div class="step-circle">3</div><div class="step-label">Akun</div></div>
+                <div class="step"><div class="step-circle">4</div><div class="step-label">Bayar</div></div>
+                <div class="step"><div class="step-circle">5</div><div class="step-label">Selesai</div></div>
+            </div>
+            <h2 class="detail-title">Pilih Robux</h2>
+            <p class="login-subtitle">Top up Robux via login di GreenTopUp hanya dapat dilakukan jika akun telah dimainkan <span>minimal 20 menit</span> tanpa jeda.</p>
+            <div class="login-grid">
+                <div class="login-card" onclick="selectLoginPackage(this, 80, 14500)">
+                    <div class="pkg-header"><i class="fa-solid fa-cube"></i> 80 Robux</div>
+                    <div class="pkg-time"><i class="fa-solid fa-truck-fast"></i> ±15 Menit</div>
+                    <div class="pkg-price-old">Rp 15.000</div>
+                    <div class="pkg-price-new">Rp 14.500</div>
+                    <div class="pkg-disc">Disc 3%</div>
+                </div>
+                <div class="login-card" onclick="selectLoginPackage(this, 160, 29000)">
+                    <div class="pkg-header"><i class="fa-solid fa-cube"></i> 160 Robux</div>
+                    <div class="pkg-time"><i class="fa-solid fa-truck-fast"></i> ±15 Menit</div>
+                    <div class="pkg-price-old">Rp 30.000</div>
+                    <div class="pkg-price-new">Rp 29.000</div>
+                    <div class="pkg-disc">Disc 3%</div>
+                </div>
+                <div class="login-card" onclick="selectLoginPackage(this, 240, 43500)">
+                    <div class="pkg-header"><i class="fa-solid fa-cube"></i> 240 Robux</div>
+                    <div class="pkg-time"><i class="fa-solid fa-truck-fast"></i> ±15 Menit</div>
+                    <div class="pkg-price-old">Rp 45.000</div>
+                    <div class="pkg-price-new">Rp 43.500</div>
+                    <div class="pkg-disc">Disc 3%</div>
+                </div>
+                <div class="login-card" onclick="selectLoginPackage(this, 320, 58000)">
+                    <div class="pkg-header"><i class="fa-solid fa-cube"></i> 320 Robux</div>
+                    <div class="pkg-time"><i class="fa-solid fa-truck-fast"></i> ±15 Menit</div>
+                    <div class="pkg-price-old">Rp 60.000</div>
+                    <div class="pkg-price-new">Rp 58.000</div>
+                    <div class="pkg-disc">Disc 3%</div>
+                </div>
+                <div class="login-card" onclick="selectLoginPackage(this, 500, 70000)">
+                    <div class="pkg-header"><i class="fa-solid fa-cube"></i> 500 Robux</div>
+                    <div class="pkg-time"><i class="fa-solid fa-truck-fast"></i> ±15 Menit</div>
+                    <div class="pkg-price-old">Rp 74.000</div>
+                    <div class="pkg-price-new">Rp 70.000</div>
+                    <div class="pkg-disc">Disc 5%</div>
+                </div>
+                <div class="login-card" onclick="selectLoginPackage(this, 1000, 140000)">
+                    <div class="pkg-header"><i class="fa-solid fa-cube"></i> 1000 Robux</div>
+                    <div class="pkg-time"><i class="fa-solid fa-truck-fast"></i> ±15 Menit</div>
+                    <div class="pkg-price-old">Rp 150.000</div>
+                    <div class="pkg-price-new">Rp 140.000</div>
+                    <div class="pkg-disc">Disc 7%</div>
+                </div>
+            </div>
+            <div style="max-width: 400px; margin: 0 auto;">
+                <button class="btn-continue-checkout" onclick="continueLoginCheckout()">Lanjutkan Pemesanan</button>
+                <button class="btn-secondary-custom" style="width: 100%; border: none; margin-top: 10px;" onclick="navigatePage('home')">Kembali</button>
+            </div>
+        </div>
+        <div id="giftcard-detail-view">
+            <div class="giftcard-bubble">
+                <div class="giftcard-icon"><i class="fa-solid fa-gift"></i></div>
+                <h2>Redeem Roblox Codes</h2>
+                <p>Masukkan kode voucher, gift card, atau kode promo virtual item kamu di bawah ini untuk segera ditambahkan ke akunmu.</p>
+                <input type="text" id="giftCardCode" class="giftcard-input" placeholder="Ketik Kodemu di Sini">
+                <p class="giftcard-terms">Dengan meredeem kode ini, kamu menyetujui <a href="#">Syarat Penggunaan</a> dan <a href="#">Kebijakan Privasi</a> kami.</p>
+                <button class="btn-continue-checkout" style="max-width: 300px; margin: 0 auto; display: block;" onclick="redeemGiftCard()">Redeem Sekarang</button>
+                <button class="btn-secondary-custom" style="width: 100%; max-width: 300px; border: none; margin-top: 15px;" onclick="navigatePage('home')">Batalkan</button>
+            </div>
+        </div>
+        <div id="about-view">
+            <div class="about-card">
+                <div class="about-image"><img src="gambar .png" alt="Mascot" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3254/3254924.png';"></div>
+                <div class="about-content">
+                    <h2>GreenTopUp: <span>Level Up Your Game</span></h2>
+                    <p>Kami hadir sejak 2026 untuk memberikan akses mudah, murah, and aman bagi para gamers untuk mendapatkan item premium.</p>
+                    <button class="btn-primary-custom" style="padding: 12px 25px;" onclick="showContactModal()">Hubungi CS Kami</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;"><button class="btn-secondary-custom" onclick="navigatePage('home')"><i class="fa-solid fa-arrow-left"></i> Kembali</button></div>
+        </div>
+        <div id="auth-view">
+            <div class="auth-box" id="loginBox">
+                <h2 class="auth-title">Masuk Akun</h2>
+                <p class="auth-desc">Silakan login untuk melanjutkan transaksi</p>
+                <div class="input-group"><i class="fa-regular fa-envelope"></i><input type="email" placeholder="Alamat Email"></div>
+                <div class="input-group"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Kata Sandi"></div>
+                <button class="btn-buy" onclick="navigatePage('home')">Masuk</button>
+                <div class="auth-switch">Belum punya akun? <a onclick="toggleAuth('signup')">Daftar Sekarang</a></div>
+            </div>
+            <div class="auth-box" id="signupBox" style="display: none;">
+                <h2 class="auth-title">Daftar Akun</h2>
+                <p class="auth-desc">Bergabunglah dengan komunitas GreenTopUp</p>
+                <div class="input-group"><i class="fa-regular fa-user"></i><input type="text" placeholder="Nama Lengkap"></div>
+                <div class="input-group"><i class="fa-regular fa-envelope"></i><input type="email" placeholder="Alamat Email"></div>
+                <div class="input-group"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Kata Sandi"></div>
+                <button class="btn-buy" onclick="navigatePage('home')">Daftar</button>
+                <div class="auth-switch">Sudah punya akun? <a onclick="toggleAuth('signin')">Masuk di sini</a></div>
+            </div>
+        </div>
+        <div id="cart-view"></div>
+        <div id="checkout-view">
+            <h2 class="section-title">Checkout Pembelian</h2>
+            <div class="checkout-box" style="text-align: center;">
+                <h3 id="checkout-product-name" style="color: #2f855a; margin-bottom: 20px;">Produk</h3>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Anda akan menyelesaikan pembelian untuk item di atas.</p>
+                <button class="btn-secondary-custom" onclick="navigatePage('cart')">Batal</button>
+                <button class="btn-primary-custom" onclick="processCheckoutSuccess()">Bayar Sekarang</button>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" id="footer-section">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo-box"><img src="logo.png" alt="Robux Logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Roblox_Logo_2022.svg/512px-Roblox_Logo_2022.svg.png';"></div>
+                <p>GreenTopUp pilihan nomor satu untuk jadi teman robloxmu! Kebutuhan roblox apapun pasti ada di GreenTopUp!</p>
+                <div class="social-icons">
+                    <div><i class="fa-brands fa-instagram"></i></div>
+                    <div><i class="fa-brands fa-youtube"></i></div>
+                </div>
+            </div>
+            <div class="footer-links-container">
+                <div class="footer-column">
+                    <h4>Produk</h4>
+                    <ul>
+                        <li><a href="#">Robux</a></li>
+                        <li><a href="#">Gamepass PO</a></li>
+                        <li><a href="#">Item Roblox</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Item Roblox</h4>
+                    <ul>
+                        <li><a href="#">Bloxfruits Gamepass</a></li>
+                        <li><a href="#">Bloxfruits Permanen</a></li>
+                        <li><a href="#">Expedition Antartica</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Informasi</h4>
+                    <ul>
+                        <li><a href="#">FAQ (Pertanyaan Umum)</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Kontak Kami</h4>
+                    <ul>
+                        <li><a onclick="showContactModal()" style="cursor: pointer;">Telegram(@GreenTopUpCS)</a></li>
+                        <li><a href="#">Instagram(@GreenTopUp)</a></li>
+                        <li><a onclick="showContactModal()" style="cursor: pointer;">Kirim Pesan Bantuan</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>By Irsa & Nayla &copy; 2026 GreenTopUp.</p>
+            <p class="disclaimer">GreenTopUp.com merupakan platform independen yang ditujukan bagi komunitas pemain Roblox. Kami tidak memiliki afiliasi atau hubungan resmi dengan Roblox Corporation.</p>
+        </div>
+    </footer>
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon-container"><i class="fa-solid fa-headset"></i></div>
+            <h3>Hubungi Kami</h3>
+            <p>Butuh bantuan atau ada kendala transaksi? Tim CS GreenTopUp siap membantu kamu!</p>
+            <div class="phone-box"><i class="fa-brands fa-whatsapp"></i> +62 80211200522</div>
+            <button class="btn-close-modal" onclick="closeContactModal()">Tutup Jendela</button>
+        </div>
+    </div>
+    <script>
+        // Database Contoh Riwayat Pesanan
+        const sampleOrders = [
+            {
+                invoice: "GREEN20260529-EC39XQL",
+                username: "Irsa_Syantik2",
+                date: "29 - May - 26",
+                total: 21313,
+                statusPesanan: "Sukses",
+                statusPembayaran: "Sukses",
+                statusPengiriman: "Gift Gamepass Selesai Dikirim",
+                items: "150 Robux",
+                jenisPengiriman: "Robux-Gamepass",
+                estimasiPending: "2026-05-30 10:00:00",
+                estimasiMasuk: "2026-06-03 10:00:00",
+                hargaProduk: 18000,
+                adminFee: 225,
+                serviceFee: 3088
+            },
+            {
+                invoice: "GREEN20260528-71GY2OM",
+                username: "Irsa_Syantik2",
+                date: "28 - May - 26",
+                total: 123861,
+                statusPesanan: "Dibatalkan",
+                statusPembayaran: "Dibatalkan",
+                statusPengiriman: "-",
+                items: "1000 Robux",
+                jenisPengiriman: "Robux-Gamepass",
+                estimasiPending: "-",
+                estimasiMasuk: "-",
+                hargaProduk: 110000,
+                adminFee: 225,
+                serviceFee: 13636
+            },
+            {
+                invoice: "GREEN20260517-OL9WL3S",
+                username: "Irsa_Syantik2",
+                date: "17 - May - 26",
+                total: 54378,
+                statusPesanan: "Sukses",
+                statusPembayaran: "Sukses",
+                statusPengiriman: "Gift Gamepass Selesai Dikirim",
+                items: "500 Robux",
+                jenisPengiriman: "Robux-Gamepass",
+                estimasiPending: "2026-05-18 12:00:00",
+                estimasiMasuk: "2026-05-23 12:00:00",
+                hargaProduk: 48000,
+                adminFee: 225,
+                serviceFee: 6153
+            },
+            {
+                invoice: "GREEN20260412-92D7P2H",
+                username: "Irsa_Syantik2",
+                date: "12 - Apr - 26",
+                total: 32425,
+                statusPesanan: "Sukses",
+                statusPembayaran: "Sukses",
+                statusPengiriman: "Cek Pending Robux",
+                items: "280 Robux",
+                jenisPengiriman: "Robux-Gamepass",
+                estimasiPending: "2026-04-15 10:46:20",
+                estimasiMasuk: "2026-04-17 11:43:48",
+                hargaProduk: 28658,
+                adminFee: 225,
+                serviceFee: 3542
+            }
+        ];
+
+        let activeOrders = JSON.parse(localStorage.getItem('greenOrdersHistory')) || sampleOrders;
+        let selectedCheckTab = 'user';
+        let currentCheckoutIndex = null;
+
+        function showContactModal(){document.getElementById('contactModal').classList.add('show')}
+        function closeContactModal(){document.getElementById('contactModal').classList.remove('show')}
+        function toggleDarkMode(){document.body.classList.toggle('dark-mode');let t=document.getElementById('darkModeBtn');document.body.classList.contains('dark-mode')?(t.classList.remove('fa-moon'),t.classList.add('fa-sun'),t.style.color='#fde047'):(t.classList.remove('fa-sun'),t.classList.add('fa-moon'),t.style.color='var(--text-main)')}
+        
+        function hideAllViews(){
+            ['home-view','detail-view','login-detail-view','giftcard-detail-view','about-view','auth-view','cart-view','checkout-view','leaderboard-view','check-order-search-view','check-order-list-view','check-order-detail-view'].forEach(e=>{
+                let el = document.getElementById(e);
+                if(el) el.style.display='none';
+            });
+            document.querySelectorAll('.navbar a').forEach(e=>e.classList.remove('active'));
+        }
+
+        function navigatePage(e,t=null){
+            hideAllViews();
+            if('home'===e){
+                document.getElementById('home-view').style.display='block';
+                !t||'top'===t?(document.getElementById('navHome').classList.add('active'),window.scrollTo({top:0,behavior:'smooth'})):'product-section'===t&&(document.getElementById('navTopup').classList.add('active'),document.getElementById('product-section').scrollIntoView({behavior:'smooth'}));
+            }else if('about'===e){
+                document.getElementById('about-view').style.display='block';
+                document.getElementById('navAbout').classList.add('active');
+                window.scrollTo({top:0,behavior:'smooth'});
+            }else if('leaderboard'===e){
+                document.getElementById('leaderboard-view').style.display='block';
+                document.getElementById('navLeaderboard').classList.add('active');
+                window.scrollTo({top:0,behavior:'smooth'});
+            }else if('check-order'===e){
+                document.getElementById('check-order-search-view').style.display='block';
+                document.getElementById('navCheckOrder').classList.add('active');
+                window.scrollTo({top:0,behavior:'smooth'});
+            }else if('check-order-list'===e){
+                document.getElementById('check-order-list-view').style.display='block';
+                document.getElementById('navCheckOrder').classList.add('active');
+            }else if('auth'===e){
+                document.getElementById('auth-view').style.display='block';
+                'signup'===t?(document.getElementById('navSignup').classList.add('active'),toggleAuth('signup')):(document.getElementById('navSignin').classList.add('active'),toggleAuth('signin'));
+                window.scrollTo({top:0,behavior:'smooth'});
+            }else if('cart'===e){
+                document.getElementById('cart-view').style.display='block';
+                window.scrollTo({top:0,behavior:'smooth'});
+            }
+        }
+
+        // FUNGSI PENCARIAN CEK PESANAN
+        function switchCheckTab(tab){
+            selectedCheckTab = tab;
+            let btnUser = document.getElementById('tabUserBtn');
+            let btnInv = document.getElementById('tabInvoiceBtn');
+            let input = document.getElementById('checkOrderInput');
+            if(tab === 'user'){
+                btnUser.style.background = '#6FCF97';
+                btnUser.style.color = '#fff';
+                btnInv.style.background = 'transparent';
+                btnInv.style.color = 'var(--text-muted)';
+                input.placeholder = 'Username Roblox atau Email kamu';
+            }else{
+                btnInv.style.background = '#6FCF97';
+                btnInv.style.color = '#fff';
+                btnUser.style.background = 'transparent';
+                btnUser.style.color = 'var(--text-muted)';
+                input.placeholder = 'Masukkan Invoice ID (Contoh: GREEN2026...)';
+            }
+        }
+
+        function handleSearchOrder() {
+    let query = document.getElementById('checkOrderInput').value.trim();
+    
+    if (!query) {
+        alert('Silakan masukkan Username Roblox atau Invoice ID terlebih dahulu!');
+        return;
+    }
+
+    document.getElementById('displaySearchQuery').innerText = query;
+
+    // Filter HANYA data yang benar-benar cocok dengan Query (Username / Invoice ID)
+    let filtered = activeOrders.filter(o => 
+        o.username.toLowerCase() === query.toLowerCase() || 
+        o.invoice.toLowerCase() === query.toLowerCase()
+    );
+
+    // Kirim data hasil filter (tanpa menampilkan semua pesanan jika tidak cocok)
+    renderOrderTable(filtered);
+    navigatePage('check-order-list');
+}
+
+        function renderOrderTable(orders) {
+    let tbody = document.getElementById('orderTableBody');
+    tbody.innerHTML = '';
+
+    // Jika tidak ada data yang cocok, tampilkan pesan aman
+    if (orders.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                    <i class="fa-solid fa-magnifying-glass-minus" style="font-size: 32px; color: #ef4444; margin-bottom: 10px; display: block;"></i>
+                    <strong style="font-size: 16px; color: var(--text-main);">Pesanan tidak ditemukan</strong><br>
+                    <span style="font-size: 13px;">Pastikan Username Roblox atau Invoice ID yang kamu masukkan sudah benar.</span>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    // Render data jika ditemukan match
+    orders.forEach(item => {
+        let statusPesananBadge = item.statusPesanan === 'Sukses' ? '<span class="status-badge-success">Sukses</span>' : '<span class="status-badge-failed">Dibatalkan</span>';
+        let statusPembayaranBadge = item.statusPembayaran === 'Sukses' ? '<span class="status-badge-success">Sukses</span>' : '<span class="status-badge-failed">Dibatalkan</span>';
+        let statusPengirimanBadge = item.statusPengiriman.includes('Sukses') || item.statusPengiriman.includes('Selesai') ? 
+            `<span class="status-badge-success">${item.statusPengiriman}</span>` : 
+            (item.statusPengiriman === '-' ? '-' : `<span class="status-badge-info">${item.statusPengiriman}</span>`);
+
+        let tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--border-color)';
+        tr.innerHTML = `
+            <td style="padding: 16px 10px; color: #6FCF97; font-weight: 800;">${item.invoice}</td>
+            <td style="padding: 16px 10px; color: var(--text-muted); font-weight: 500;">${item.date}</td>
+            <td style="padding: 16px 10px; color: var(--text-main);">Rp ${item.total.toLocaleString('id-ID')}</td>
+            <td style="padding: 16px 10px;">${statusPesananBadge}</td>
+            <td style="padding: 16px 10px;">${statusPembayaranBadge}</td>
+            <td style="padding: 16px 10px;">${statusPengirimanBadge}</td>
+            <td style="padding: 16px 10px; text-align: center;">
+                <button class="btn-buy" style="padding: 8px 18px; font-size: 13px; width: auto;" onclick="showInvoiceDetail('${item.invoice}')">Lihat</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+        function showInvoiceDetail(invoiceId){
+            let item = activeOrders.find(o => o.invoice === invoiceId) || activeOrders[0];
+            
+            document.getElementById('invProdTitle').innerText = item.items;
+            document.getElementById('invProdType').innerText = `Jenis Pengiriman - ${item.jenisPengiriman}`;
+            document.getElementById('invProdPending').innerText = item.estimasiPending;
+            document.getElementById('invProdMasuk').innerText = item.estimasiMasuk;
+            document.getElementById('invProdPrice').innerText = `Rp ${item.hargaProduk.toLocaleString('id-ID')}`;
+
+            document.getElementById('invIdText').innerText = item.invoice;
+            document.getElementById('invUsernameText').innerText = item.username;
+            document.getElementById('invListItems').innerText = item.items;
+            
+            document.getElementById('invStatusPesanan').className = item.statusPesanan === 'Sukses' ? 'status-badge-success' : 'status-badge-failed';
+            document.getElementById('invStatusPesanan').innerText = item.statusPesanan;
+
+            document.getElementById('invStatusPembayaran').className = item.statusPembayaran === 'Sukses' ? 'status-badge-success' : 'status-badge-failed';
+            document.getElementById('invStatusPembayaran').innerText = item.statusPembayaran;
+
+            document.getElementById('invStatusPengiriman').className = item.statusPengiriman.includes('Selesai') ? 'status-badge-success' : (item.statusPengiriman === '-' ? '' : 'status-badge-info');
+            document.getElementById('invStatusPengiriman').innerText = item.statusPengiriman;
+
+            document.getElementById('invJenisPengiriman').innerText = item.jenisPengiriman;
+            document.getElementById('invSubtotal').innerText = `Rp ${item.hargaProduk.toLocaleString('id-ID')}`;
+            document.getElementById('invAdminFee').innerText = `Rp ${item.adminFee.toLocaleString('id-ID')}`;
+            document.getElementById('invServiceFee').innerText = `Rp ${item.serviceFee.toLocaleString('id-ID')}`;
+            document.getElementById('invGrandTotal').innerText = `Rp ${item.total.toLocaleString('id-ID')}`;
+
+            hideAllViews();
+            document.getElementById('check-order-detail-view').style.display = 'block';
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+
+        function toggleAuth(e){'signup'===e?(document.getElementById('loginBox').style.display='none',document.getElementById('signupBox').style.display='block'):(document.getElementById('signupBox').style.display='none',document.getElementById('loginBox').style.display='block')}
+        
+        let currentProductName="",basePrice=0,baseRobux=0;
+        function goToDetail(e,t,n){currentProductName=e;hideAllViews();'Robux Via Login'===e?document.getElementById('login-detail-view').style.display='block':'Robux Gift Gamecard'===e?document.getElementById('giftcard-detail-view').style.display='block':(basePrice=t,baseRobux=n,document.getElementById('robuxInputNumber').value=n,document.getElementById('robuxSlider').value=n,calculatePrice(),document.getElementById('detail-view').style.display='block');window.scrollTo({top:0,behavior:'smooth'})}
+        function syncInput(){let e=document.getElementById('robuxSlider').value;document.getElementById('robuxInputNumber').value=e;calculatePrice()}
+        function syncSlider(){let e=document.getElementById('robuxInputNumber').value;document.getElementById('robuxSlider').value=e;calculatePrice()}
+        function calculatePrice(){let e=parseInt(document.getElementById('robuxSlider').value)||0;document.getElementById('sliderValDisplay').innerText=e;let t=Math.floor(basePrice/baseRobux*e);document.getElementById('totalPriceDisplay').innerText='Rp '+t.toLocaleString('id-ID')}
+        
+        function addToCartFromDetail(){
+            let e=document.getElementById('robloxUsername').value,t=document.getElementById('robuxSlider').value,n=document.getElementById('totalPriceDisplay').innerText;
+            if(!e)return void alert('Mohon isi Username Roblox terlebih dahulu!');
+            let o=`${currentProductName} (${t} R$)`;
+            addToCart(o,n,e);
+            navigatePage('cart');
+        }
+
+        let selectedLoginPackage=null;
+        function selectLoginPackage(e,t,n){document.querySelectorAll('.login-card').forEach(e=>e.classList.remove('active'));e.classList.add('active');selectedLoginPackage={amount:t,price:n}}
+        function continueLoginCheckout(){ 
+            if(!selectedLoginPackage)return void alert('Silakan pilih nominal Robux terlebih dahulu!');
+            let uname = window.prompt("Masukkan Username Roblox kamu:") || "Irsa_Syantik2";
+            let e=`Robux Via Login (${selectedLoginPackage.amount} R$)`,t=`Rp ${selectedLoginPackage.price.toLocaleString('id-ID')}`;
+            addToCart(e,t,uname);
+            navigatePage('cart');
+        }
+
+        function redeemGiftCard(){let e=document.getElementById('giftCardCode').value;if(!e)return void alert('Yah, kamu belum memasukkan kode gift card-nya!');alert(`Yey! Kode "${e}" milikmu sedang diproses oleh sistem. Tunggu sebentar ya!`);document.getElementById('giftCardCode').value='';navigatePage('home')}
+        
+        let cart=JSON.parse(localStorage.getItem('greenCart'))||[];
+        function addToCart(e,t,uname="Irsa_Syantik2"){cart.push({name:e,price:t,username:uname});localStorage.setItem('greenCart',JSON.stringify(cart));alert(`Asik! ${e} berhasil ditambahkan ke keranjang 🛒`);renderCart()}
+        function removeFromCart(e){cart.splice(e,1);localStorage.setItem('greenCart',JSON.stringify(cart));renderCart()}
+        
+        function renderCart(){
+            const e=document.getElementById('cart-view');
+            if(0===cart.length)e.innerHTML='<div class="cart-header"><h2>Keranjang Belanja</h2></div><div class="cart-empty"><i class="fa-solid fa-cart-arrow-down" style="font-size: 60px; color: var(--text-muted); margin-bottom: 20px;"></i><h3>Yah, keranjangmu masih kosong!</h3><p>Ayo temukan item Roblox incaranmu dan mulai top up sekarang.</p><button class="btn-primary-custom" onclick="navigatePage(\'home\', \'product-section\')">Mulai Belanja</button></div>';
+            else{
+                let t='<div class="cart-header"><h2>Keranjang Belanja</h2><span style="background: #eaf7f0; color: #2f855a; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 14px;">'+cart.length+' Item</span></div><div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">';
+                cart.forEach((e,n)=>{t+='<div style="background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.02); flex-wrap: wrap; gap: 15px;"><div><h4 style="margin: 0 0 8px; color: var(--text-main); font-weight: 700; font-size: 16px;">'+e.name+'</h4><p style="margin: 0; color: #6FCF97; font-weight: 800; font-size: 15px;">'+e.price+'</p></div><div style="display: flex; gap: 10px;"><button class="btn-buy" style="padding: 10px 20px; font-size: 14px; width: auto; box-shadow: none;" onclick="goToCheckout('+n+')">Checkout</button><button class="btn-secondary-custom" style="padding: 10px 15px; border-color: #ef4444; color: #ef4444;" onclick="removeFromCart('+n+')" title="Hapus dari keranjang"><i class="fa-solid fa-trash"></i></button></div></div>'}),t+='</div>',e.innerHTML=t;
+            }
+        }
+
+        function goToCheckout(e){
+            currentCheckoutIndex = e;
+            let t=cart[e];
+            document.getElementById('checkout-product-name').innerText=t.name+' ('+t.price+')';
+            hideAllViews();
+            document.getElementById('checkout-view').style.display='block';
+            window.scrollTo({top:0,behavior:'smooth'});
+        }
+
+        function processCheckoutSuccess(){
+            if(currentCheckoutIndex !== null && cart[currentCheckoutIndex]){
+                let item = cart[currentCheckoutIndex];
+                let priceNum = parseInt(item.price.replace(/[^0-9]/g, '')) || 32425;
+                let newInvoice = "GREEN" + new Date().getFullYear() + ("0" + (new Date().getMonth() + 1)).slice(-2) + ("0" + new Date().getDate()).slice(-2) + "-" + Math.random().toString(36).substring(2, 9).toUpperCase();
+                
+                let newOrder = {
+                    invoice: newInvoice,
+                    username: item.username || "Irsa_Syantik2",
+                    date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' }).replace(/ /g, ' - '),
+                    total: priceNum,
+                    statusPesanan: "Sukses",
+                    statusPembayaran: "Sukses",
+                    statusPengiriman: "Cek Pending Robux",
+                    items: item.name,
+                    jenisPengiriman: "Robux-Gamepass",
+                    estimasiPending: "2026-07-28 10:00:00",
+                    estimasiMasuk: "2026-08-02 10:00:00",
+                    hargaProduk: Math.round(priceNum * 0.88),
+                    adminFee: 225,
+                    serviceFee: Math.round(priceNum * 0.11)
+                };
+
+                activeOrders.unshift(newOrder);
+                localStorage.setItem('greenOrdersHistory', JSON.stringify(activeOrders));
+                cart.splice(currentCheckoutIndex, 1);
+                localStorage.setItem('greenCart', JSON.stringify(cart));
+                renderCart();
+            }
+
+            alert('Pembayaran berhasil disimulasikan! Pesanan kamu sudah dicatat.');
+            navigatePage('check-order');
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>
